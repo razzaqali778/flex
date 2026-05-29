@@ -1,0 +1,57 @@
+{
+  "name": "flex-finops",
+  "displayName": "Flex FinOps",
+  "description": "Flex plugin APIs from VS Code — same catalog as Chrome extension and web app",
+  "version": "0.2.0",
+  "publisher": "flex",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "flex.runAction", "title": "Flex: Run Plugin Action…" },
+      { "command": "flex.connect", "title": "Flex: Connect to API" },
+      { "command": "flex.openApp", "title": "Flex: Open Web App" },
+      { "command": "flex.getKpis", "title": "Flex: Get Dashboard KPIs" },
+      { "command": "flex.getChargeback", "title": "Flex: Get Team Chargeback" },
+      { "command": "flex.getPendingApprovals", "title": "Flex: Get Pending Approvals" },
+      { "command": "flex.getPublished", "title": "Flex: Get Published Datasets" },
+      { "command": "flex.getAnomalies", "title": "Flex: Get Open Anomalies" },
+      { "command": "flex.getCloudUsage", "title": "Flex: Get Cloud Usage Trend" },
+      { "command": "flex.sendEzTracSync", "title": "Flex: Send EzTrac Sync Request" },
+      { "command": "flex.sendDhubSync", "title": "Flex: Send dhub-rpt Sync Request" },
+      { "command": "flex.sendInboundRequest", "title": "Flex: Send Inbound Data Request" }
+    ],
+    "configuration": {
+      "title": "Flex FinOps",
+      "properties": {
+        "flex.apiUrl": {
+          "type": "string",
+          "default": "http://localhost:3847",
+          "description": "Flex REST API (npm run api)"
+        },
+        "flex.webUrl": {
+          "type": "string",
+          "default": "http://localhost:5173",
+          "description": "Flex web app URL"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "precompile": "node ../../scripts/sync-extension-catalog.mjs",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "npm run compile && vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.26.1",
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "flex-finops",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Flex FinOps platform — cloud usage, resource allocation, and cross-app data exchange",
+  "scripts": {
+    "dev": "npm run dev --workspace=apps/flex",
+    "dev:flex": "npm run dev --workspace=apps/flex -- --port 5173 --strictPort",
+    "dev:marketplace": "npm run dev --workspace=apps/marketplace",
+    "dev:eztrac": "npm run dev --workspace=apps/eztrac",
+    "dev:rpt": "npm run dev --workspace=apps/rpt",
+    "dev:api": "npm run dev --workspace=services/flex-api",
+    "dev:all": "concurrently -n api,flex,market,eztrac,rpt -c blue,cyan,magenta,green,yellow \"npm:dev:api\" \"npm:dev:flex\" \"npm:dev:marketplace\" \"npm:dev:eztrac\" \"npm:dev:rpt\"",
+    "ports": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/show-dev-ports.ps1",
+    "stop:ports": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/stop-dev-ports.ps1",
+    "api": "npm install --workspace=services/flex-api && npm run start --workspace=services/flex-api",
+    "build": "npm run build --workspace=apps/flex && npm run build:extension",
+    "build:extension": "node scripts/build-extension.js",
+    "sync:extension-catalog": "node scripts/sync-extension-catalog.mjs",
+    "package:vsix": "npm install --workspace=extensions/vscode && bash scripts/package-vsix.sh",
+    "preview": "npm run preview --workspace=apps/flex",
+    "postinstall": "node scripts/ensure-rollup-native.mjs"
+  },
+  "workspaces": [
+    "apps/flex",
+    "apps/marketplace",
+    "apps/eztrac",
+    "apps/rpt",
+    "packages/flex-plugin-sdk",
+    "packages/flex-extension-catalog",
+    "packages/partner-ui",
+    "services/flex-api",
+    "extensions/vscode"
+  ],
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

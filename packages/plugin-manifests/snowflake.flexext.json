@@ -1,0 +1,12 @@
+{
+  "id": "flex.ext.snowflake",
+  "name": "Snowflake Export",
+  "version": "1.0.3",
+  "publisher": "Snowflake",
+  "description": "Export chargeback and usage datasets for warehouse analytics.",
+  "entry": "bundles/snowflake",
+  "engines": { "flex": "^1.0.0" },
+  "permissions": ["chargeback:read", "cloud-usage:read"],
+  "icon": "❄️",
+  "categories": ["export"]
+}

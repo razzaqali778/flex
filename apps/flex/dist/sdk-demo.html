@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Flex SDK — no API URL</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+      button { margin: 0.25rem 0.25rem 0.25rem 0; padding: 0.5rem 0.75rem; cursor: pointer; }
+      pre { background: #111; color: #eee; padding: 1rem; overflow: auto; font-size: 12px; }
+      .ok { color: #0a0; } .err { color: #c00; }
+    </style>
+  </head>
+  <body>
+    <h1>Flex SDK without <code>apiUrl</code></h1>
+    <p>
+      Open <strong>Flex</strong> in another tab:
+      <a href="/" target="_blank">http://localhost:5173/</a>
+      (same browser). Then use the buttons below.
+    </p>
+    <p id="status">Checking connection…</p>
+    <div>
+      <button type="button" id="btn-catalog">Catalog</button>
+      <button type="button" id="btn-kpis">Consume KPIs</button>
+      <button type="button" id="btn-chargeback">Consume chargeback</button>
+      <button type="button" id="btn-inbound">Produce inbound request</button>
+    </div>
+    <pre id="out">(results here)</pre>
+
+    <script type="module">
+      // Inline minimal client — same as flex-plugin-sdk without apiUrl (BroadcastChannel)
+      const CHANNEL = 'flex-plugin-api';
+
+      function call(method, payload) {
+        return new Promise((resolve, reject) => {
+          const bc = new BroadcastChannel(CHANNEL);
+          const id = `demo-${Date.now()}`;
+          const onMsg = (ev) => {
+            const d = ev.data;
+            if (!d || d.channel !== CHANNEL || d.id !== id) return;
+            bc.removeEventListener('message', onMsg);
+            bc.close();
+            if (d.ok) resolve(d.result);
+            else reject(new Error(d.error || 'failed'));
+          };
+          bc.addEventListener('message', onMsg);
+          bc.postMessage({ channel: CHANNEL, id, method, payload });
+          setTimeout(() => {
+            bc.removeEventListener('message', onMsg);
+            bc.close();
+            reject(new Error('Timeout — is Flex open at http://localhost:5173 ?'));
+          }, 10000);
+        });
+      }
+
+      const status = document.getElementById('status');
+      const out = document.getElementById('out');
+
+      async function ping() {
+        try {
+          await call('catalog');
+          status.innerHTML = '<span class="ok">Connected to Flex (BroadcastChannel, no API)</span>';
+        } catch (e) {
+          status.innerHTML = `<span class="err">Not connected: ${e.message}</span>`;
+        }
+      }
+
+      function show(data) {
+        out.textContent = JSON.stringify(data, null, 2);
+      }
+
+      document.getElementById('btn-catalog').onclick = async () => {
+        try { show(await call('catalog')); } catch (e) { show({ error: e.message }); }
+      };
+      document.getElementById('btn-kpis').onclick = async () => {
+        try {
+          show(await call('consume', { pluginId: 'flex.dashboard', dataset: 'kpi_snapshot' }));
+        } catch (e) { show({ error: e.message }); }
+      };
+      document.getElementById('btn-chargeback').onclick = async () => {
+        try {
+          show(await call('consume', { pluginId: 'flex.chargeback', dataset: 'team_showback' }));
+        } catch (e) { show({ error: e.message }); }
+      };
+      document.getElementById('btn-inbound').onclick = async () => {
+        try {
+          show(await call('produce', {
+            pluginId: 'flex.governance',
+            dataset: 'inbound_request',
+            records: [{
+              fromApp: 'eztrac',
+              dataset: 'forecast_variance',
+              recordCount: 99,
+              purpose: 'From sdk-demo.html (no API)',
+            }],
+            sourceApp: 'eztrac',
+          }));
+        } catch (e) { show({ error: e.message }); }
+      };
+
+      ping();
+      setInterval(ping, 5000);
+    </script>
+  </body>
+</html>

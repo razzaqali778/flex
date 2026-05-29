@@ -1,0 +1,29 @@
+{
+  "kpis": {
+    "totalSpend": 284750,
+    "spendChange": -4.2,
+    "utilization": 78.4,
+    "activeResources": 1247,
+    "openAnomalies": 5,
+    "pendingApprovals": 3
+  },
+  "dataRequests": [],
+  "publishedDatasets": [],
+  "anomalies": [],
+  "transferLog": [],
+  "savings": [],
+  "chargeback": [],
+  "tagRules": [],
+  "workforce": [],
+  "connectedApps": [],
+  "alignmentRows": [],
+  "resolvedAlignmentIds": [],
+  "settings": {
+    "userRole": "admin",
+    "slackApprovals": true,
+    "presentationMode": false,
+    "meetingMode": false,
+    "spendPulse": true,
+    "desktopNotifications": true
+  }
+}

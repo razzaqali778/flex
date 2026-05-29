@@ -1,0 +1,89 @@
+{
+  "manifest_version": 3,
+  "name": "Flex — Cloud FinOps",
+  "version": "2.0.0",
+  "description": "Cloud FinOps — chargeback, workforce alignment, governed exchange, RBAC, and AI copilot",
+  "permissions": ["storage", "sidePanel", "notifications", "tabs", "contextMenus"],
+  "host_permissions": [
+    "http://localhost:3847/*",
+    "http://127.0.0.1:3847/*",
+    "http://localhost:5173/*",
+    "https://console.aws.amazon.com/*",
+    "https://*.console.aws.amazon.com/*",
+    "https://portal.azure.com/*",
+    "https://console.cloud.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://console.aws.amazon.com/*",
+        "https://*.console.aws.amazon.com/*",
+        "https://portal.azure.com/*",
+        "https://console.cloud.google.com/*"
+      ],
+      "js": ["content/pageSense.js"],
+      "css": ["content/pageSense.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["content/pageSense.css", "shared/extensionCatalog.json"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "action": {
+    "default_title": "Flex FinOps — Quick View",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "app/index.html"
+  },
+  "commands": {
+    "open-dashboard": {
+      "suggested_key": { "default": "Alt+Shift+D", "mac": "Alt+Shift+D" },
+      "description": "Open Flex dashboard in side panel"
+    },
+    "open-exchange": {
+      "suggested_key": { "default": "Alt+Shift+E", "mac": "Alt+Shift+E" },
+      "description": "Open Data Exchange"
+    },
+    "open-ai": {
+      "suggested_key": { "default": "Alt+Shift+A", "mac": "Alt+Shift+A" },
+      "description": "Open Flex AI assistant"
+    },
+    "open-insights": {
+      "description": "Open FinOps Insights"
+    },
+    "open-anomalies": {
+      "description": "Open anomalies view"
+    },
+    "open-chargeback": {
+      "suggested_key": { "default": "Alt+Shift+C", "mac": "Alt+Shift+C" },
+      "description": "Open Chargeback & showback"
+    },
+    "open-workforce": {
+      "description": "Open Workforce alignment"
+    },
+    "open-global-search": {
+      "description": "Open global search in side panel"
+    },
+    "open-command-palette": {
+      "description": "Open command palette in side panel"
+    }
+  },
+  "options_page": "app/index.html"
+}

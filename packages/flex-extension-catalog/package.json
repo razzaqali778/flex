@@ -1,0 +1,20 @@
+{
+  "name": "flex-extension-catalog",
+  "version": "1.0.0",
+  "description": "Shared Flex plugin actions for web, Chrome, and VS Code hosts",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./catalog.json": "./catalog.json"
+  },
+  "files": ["dist", "catalog.json"],
+  "scripts": {
+    "build": "tsc && node scripts/emit-json.mjs"
+  },
+  "license": "MIT"
+}

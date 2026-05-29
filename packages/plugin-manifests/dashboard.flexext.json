@@ -1,0 +1,11 @@
+{
+  "id": "flex.dashboard",
+  "name": "Dashboard",
+  "version": "1.0.0",
+  "publisher": "Flex",
+  "description": "Executive KPIs, spend pulse, and quick-action state",
+  "entry": "flex.dashboard",
+  "engines": { "flex": "^1.0.0" },
+  "icon": "📊",
+  "categories": ["overview"]
+}

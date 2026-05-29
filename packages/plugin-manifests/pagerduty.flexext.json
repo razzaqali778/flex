@@ -1,0 +1,12 @@
+{
+  "id": "flex.ext.pagerduty",
+  "name": "PagerDuty Alerts",
+  "version": "1.2.0",
+  "publisher": "PagerDuty Inc.",
+  "description": "Escalate open cost anomalies to on-call when impact exceeds threshold.",
+  "entry": "bundles/pagerduty",
+  "engines": { "flex": "^1.0.0" },
+  "permissions": ["anomalies:read", "incidents:write"],
+  "icon": "🔔",
+  "categories": ["notifications"]
+}

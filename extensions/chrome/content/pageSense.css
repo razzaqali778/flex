@@ -1,0 +1,73 @@
+/* Flex Page Sense — ambient chip on cloud consoles */
+#flex-page-sense {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2147483646;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  animation: flex-chip-in 0.35s ease-out;
+}
+
+#flex-page-sense.hidden {
+  display: none;
+}
+
+.flex-chip-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(34, 211, 238, 0.45);
+  background: rgba(10, 14, 23, 0.92);
+  backdrop-filter: blur(12px);
+  color: #e2e8f0;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(129, 140, 248, 0.15);
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.flex-chip-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(34, 211, 238, 0.8);
+}
+
+.flex-chip-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.35), rgba(129, 140, 248, 0.35));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.flex-chip-dismiss {
+  margin-left: 4px;
+  opacity: 0.5;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 2px;
+}
+
+.flex-chip-dismiss:hover {
+  opacity: 1;
+}
+
+@keyframes flex-chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,15 @@
+export { dashboardPlugin } from './dashboard.plugin';
+export { governancePlugin } from './governance.plugin';
+export { settingsPlugin } from './settings.plugin';
+export { cloudUsagePlugin } from './cloud-usage.plugin';
+export { optimizationPlugin } from './optimization.plugin';
+export { anomaliesPlugin } from './anomalies.plugin';
+export { chargebackPlugin } from './chargeback.plugin';
+export { workforcePlugin } from './workforce.plugin';
+export { resourcesPlugin } from './resources.plugin';
+export { alignmentPlugin } from './alignment.plugin';
+export { integrationsPlugin } from './integrations.plugin';
+export { assistantPlugin } from './assistant.plugin';
+export { extensionPlugin } from './extension.plugin';
+export { partnerEzTracPlugin } from './partner-eztrac.plugin';
+export { partnerDhubRptPlugin } from './partner-dhub-rpt.plugin';

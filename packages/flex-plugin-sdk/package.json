@@ -1,0 +1,24 @@
+{
+  "name": "flex-plugin-sdk",
+  "version": "1.0.0",
+  "description": "Client SDK to consume and produce data via Flex plugins",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "keywords": ["flex", "finops", "plugin", "governance"],
+  "license": "MIT"
+}
